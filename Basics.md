@@ -1,7 +1,7 @@
 # Basics
 
 ## Header Files (.cpp; .h)
-When we have a large amount of functions and classes we need to organise them in a smarter way. 
+When we have a large amount of functions we need to organise them in a smarter way. 
 We create a separate source `.cpp` file with functionalities and a header file that enables us to include the source file. 
 
 In particular we can
@@ -16,5 +16,6 @@ Now:
 - In dir "includes", create the same-name file called `func.h` but ending with a header. 
 - Transport all methods in `func.cpp` over but remove the method bodies, keep the signature only
 - now in `main.cpp`, at the top write `#include "includes/func.h"` (this is our source file)
+
 
 But don't compile directly, we are not accessing any functionalities yet. We need to compile `func.cpp` 
