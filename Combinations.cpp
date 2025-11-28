@@ -29,13 +29,6 @@ public:
     }
 
 private:
-    // NOTE on ERROR:
-    // consider the incorrect signature:
-    // void dfs(vector<vector<int>> out, vector<int> path, vector<bool> used, vector<int> nums) {
-    // This means passing parameters BY VALUE
-    // so inside dfs(), when we want to out.push_back(path); we will be adding to a LOCAL COPY of out
-    // but when dfs returns to the parent call, the original out in permute() is still empty
-    // then permite returns an empty vector<vector<int>> and nothing prints
     void dfs(vector<vector<int>>& out, vector<int>& path, int currIndex, int b, int k) {
 
         if (size(path) == k) { out.push_back(path); return; } // found a new path
@@ -67,4 +60,5 @@ int main() {
     for (int i = 0; i < output.size(); ++i) {
         printVector(output[i]);
     }
+
 }
