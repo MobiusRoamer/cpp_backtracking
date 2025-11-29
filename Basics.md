@@ -2,9 +2,9 @@
 
 ## Abstraction Mechanisms
 ### Types
-1. Concrete type
+1. Concrete type: 
    Can be instantiated using the `new` operator.
-   The compiler knows the exact memory layout and size of objects at compile time, hence concrete types can be allocated on stack 
+   The compiler knows the exact memory layout and size of objects at compile time, hence concrete types can be allocated on stack. 
 2. Arithmetic type
    ```cpp
    class complex {
@@ -66,6 +66,7 @@ Now:
 ```
 
 But don't compile directly, we are not accessing any functionalities yet. We need to first compile `func.cpp`. 
+
 
 
 
