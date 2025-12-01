@@ -30,6 +30,18 @@
         complex& operator *= (complex z);
         complex& operator /= (complex z);
    ```
+### Overloading
+A compile time polymorphism in where the compiler infers which of the functions sharing the same name to call depending on input arguments. 
+
+The template of overloading, for example, the addition operator `+=`, with generic class, is 
+```cpp
+MyClass& operator += (const MyClass& other) {
+   // Implementation to add 'other' to 'this' object
+   //...
+   // return *this;
+}
+```
+
 ### Class
 Concepts are defined using classes. There are concrete, abstract classes, also those in hierarchies. 
 
@@ -66,6 +78,7 @@ Now:
 ```
 
 But don't compile directly, we are not accessing any functionalities yet. We need to first compile `func.cpp`. 
+
 
 
 
