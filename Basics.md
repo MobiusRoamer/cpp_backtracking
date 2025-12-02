@@ -32,13 +32,20 @@ Now:
 
 But don't compile directly, we are not accessing any functionalities yet. We need to first compile `func.cpp`.
 
-## 2. Abstraction Mechanisms
+## 2. Machine-Level Code
 
 ### 2.1 Types
-1. Concrete type: 
+The purpose of types is to make memory storage more efficient. The machine will allocate different storage size 
+depending on types hence saving on memory space depending on the variables.
+
+#### 2.1.1 Integer Types
+`short` (2 bytes), `int` (4 bytes), `long` (4 bytes) and `long long` (8 bytes) can all be used to store integers
+
+To read the memory consumed by a variable, use `sizeof()`
+#### 2.1.2 Concrete type: 
    Can be instantiated using the `new` operator.
    The compiler knows the exact memory layout and size of objects at compile time, hence concrete types can be allocated on stack. 
-2. Arithmetic type
+#### 2.1.3 Arithmetic type
    ```cpp
    class complex {
         double re, im;
