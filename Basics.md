@@ -139,8 +139,17 @@ Pointers are dereferenced using the `*` operator. This gives back a value having
 Note we can dereference as follows
 ```cpp
 char c = 'a';
-char* p = &c;
-char c2 = *p;
+// writing
+char * p;
+p = &a;
+// is the equivalent of writing
+char * p = &c;
+// meaning p is a pointer to the memory address of c hence equivalently the memory address of 'a'
+// We can read and mutate the stored data at the pointed memory address as follows
+*p = 'b';
+// means we take the data stored at the memory address associated with pointer p (which points to memory address storing 'a') and
+// changes it to 'b'
+
 ```
 which means we use a variable to point to the object referred to by `p` (that is, `a`) so `c2` essentially points to `a` now. 
 We have removed the reference layer `p`.
@@ -184,3 +193,4 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
+
