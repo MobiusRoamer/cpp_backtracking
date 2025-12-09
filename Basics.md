@@ -196,6 +196,21 @@ Finally if we want to keep both values and referential links fixed,
 const int * const p = &a;
 ```
 
+#### 2.2.4 const Pointer with Arrays
+We can read the first element of an array using a pointer
+
+```cpp
+int main() {
+     int arr[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+     // initialize pointer
+     int* p = arr;
+     cout << *p << endl; // reads the first element arr[0]
+     p++; // increment the memory address by 4 bits (because each int type consumes 4 bit memory space)
+     cout << *p << endl; // reads the second element arr[1]
+     ...
+}
+```
+
 ---
 
 ### 2.4 References
@@ -231,6 +246,7 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
+
 
 
 
