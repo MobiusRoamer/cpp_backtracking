@@ -34,7 +34,7 @@ But don't compile directly, we are not accessing any functionalities yet. We nee
 
 ---
 
-## 2. Storing Data
+## 2. Data and Operators
 
 ### 2.1 Types
 The purpose of types is to make memory storage more efficient. The machine will allocate different storage size 
@@ -210,6 +210,37 @@ int main() {
      ...
 }
 ```
+### 2.3 Functions
+
+#### 2.3.1 Formal and Value parameters
+Formal parameters are variables declared in the function's definition or signature.
+
+Value parameters are a special case where a copy of the actual argument's value is passed to the function.
+
+#### 2.3.2 Pass by Value
+```cpp
+// In the following function, num1 and num2 are formal parameters
+void swap(int num1, int num2) {
+     cout << num1 << endl;
+     cout << num2 << endl;
+     int temp = num1;
+     num1 = num2;
+     num2 = temp;
+     cout << num1 << endl;
+     cout << num2 << endl;
+}
+
+// In the main method, a and b are value parameters
+int main() {
+     int a = 10, b = 20;
+     cout << a << endl; 
+     cout << b << endl;
+     swap(a, b);
+     cout << a << endl;
+     cout << b << endl;
+}
+```
+Observe: formal parameters are swapped (num1, num2 change their referential links to 10, 20), but value parameters (a, b) remain the same (referential link to 10, 20 remian unchanged)
 
 ---
 
@@ -246,6 +277,7 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
+
 
 
 
