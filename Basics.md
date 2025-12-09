@@ -160,7 +160,7 @@ int myVariable = 10;
 int* myPointer = &myVariable; // myPointer holds the memory address of myVariable
 *myPointer = 20; // changes the value of myVariable to 20
 ```
-### 2.2.3 const Pointer
+#### 2.2.3 const Pointer
 
 Using a `const` in front of a pointer means we can only read but not mutate the pointed data. However, we can change the referential link: the pointer can point
 to something else. 
@@ -189,6 +189,11 @@ int* const p = &a;
 
 // But we cannot change the pointer's referential link
 p = &b; // INCORRECT
+```
+
+Finally if we want to keep both values and referential links fixed, 
+```cpp
+const int * const p = &a;
 ```
 
 ---
@@ -226,6 +231,7 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
+
 
 
 
