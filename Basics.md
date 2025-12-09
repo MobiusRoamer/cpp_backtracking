@@ -210,6 +210,9 @@ int main() {
      ...
 }
 ```
+
+---
+
 ### 2.3 Functions
 
 #### 2.3.1 Formal and Value parameters
@@ -277,6 +280,7 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
+
 
 
 
