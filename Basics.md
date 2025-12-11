@@ -250,9 +250,15 @@ Still consider the swap function defined as before, now
 ```cpp
 // Note in the following function we are passing the memory addresses of num1 and num2 into the function 
 void swap(int *num1, int *num2) {
-     temp = *num1;
+     int temp = *num1;
+          // temp stores the data located at the memory address pointed to by num1 (10 in this case)
+
      *num1 = *num2;
+          // this mutates the value parameter, the data stored by pointer num2 is given to the address pointed to by num1
+
      *num2 = temp;
+          // num 2 is given the data stored at temp (and temp stores the data pointed to by num1)
+          // Hence, num2 is assigned the data pointed to by num1 
 }
 
 int main() {
@@ -300,6 +306,7 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
+
 
 
 
