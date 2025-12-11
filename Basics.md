@@ -248,6 +248,7 @@ Observe: formal parameters are swapped (num1, num2 change their referential link
 #### 2.3.3 Passing by Address
 Still consider the swap function defined as before, now
 ```cpp
+// Note in the following function we are passing the memory addresses of num1 and num2 into the function 
 void swap(int *num1, int *num2) {
      temp = *num1;
      *num1 = *num2;
@@ -299,6 +300,7 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
+
 
 
 
