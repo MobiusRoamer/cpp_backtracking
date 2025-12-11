@@ -292,9 +292,9 @@ void bubbleSort(int* arr, int length) {
 
 ---
 
-### 2.4 References
+### 2.4 Struct
 
-Pointers initialize object's memory position, while references is a second name for an existing object. 
+
 
 ---
 ### Overloading
@@ -325,6 +325,7 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
+
 
 
 
