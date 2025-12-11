@@ -293,6 +293,30 @@ void bubbleSort(int* arr, int length) {
 ---
 
 ### 2.4 Struct
+Suppose we define a 2D location data type
+```cpp
+struct Location { int x, y; };
+```
+We usually need to override the notion of equality for generic data types when we expect to 
+perform operations with data structure `unordered_map`. This is commonly done as follows
+```cpp
+struct Location {
+     int x, y;
+     bool operator==(const Location& l) {
+          return l.x == x && l.y == y;
+     }
+};
+```
+For the data type to be hashable, we can define its hashcode as a separate struct
+```cpp
+struct LocationHash {
+     size_t operator()(const Location& l) const noexcept{
+          size_t h1 = hash<int>()(l.x);
+          size_t h2 = hash<int>()(l.y);
+          return h1^(h2 << 1);
+     }
+};
+```
 
 ---
 
@@ -331,6 +355,7 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
+
 
 
 
