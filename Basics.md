@@ -293,10 +293,24 @@ void bubbleSort(int* arr, int length) {
 ---
 
 ### 2.4 Struct
+
+#### 2.4.1 Defining a struct
 Suppose we define a 2D location data type
 ```cpp
 struct Location { int x, y; };
 ```
+
+We can create a Location in three different ways
+```cpp
+// first create an instance, then assign field values
+struct Location l1;
+l1.x = 3;
+l1.y = 3;
+```
+
+#### 2.4.2 
+
+#### 2.4.3 Overriding Instance Equality
 We usually need to override the notion of equality for generic data types when we expect to 
 perform operations with data structure `unordered_map`. This is commonly done as follows
 ```cpp
@@ -307,6 +321,7 @@ struct Location {
      }
 };
 ```
+#### 2.4.4 Hash Functions for Generic struct
 For the data type to be hashable, we can define its hashcode as a separate struct
 ```cpp
 struct LocationHash {
@@ -316,6 +331,20 @@ struct LocationHash {
           return h1^(h2 << 1);
      }
 };
+```
+Now to use the struct in an unordered_map, declare a third argument
+```cpp
+unordered_map<Location, T, LocationHash> map;
+```
+In general, the template for hashMap is 
+```cpp
+**template<
+    class Key,
+    class T,
+    class Hash = std::hash<Key>,
+    class KeyEqual = std::equal_to<Key>,
+    class Allocator = std::allocator< std::pair<const Key, T> >
+> class unordered_map;**
 ```
 
 ---
@@ -355,6 +384,7 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
+
 
 
 
