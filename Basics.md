@@ -271,6 +271,25 @@ int main() {
 In the main method we are passing by address. This changes the value parameters, contrasting the mutation of formal paraneters in the case
 of passing by values.
 
+
+Passing by address also enables us to pass an array into a function without explicitly declaring the array [] as an input, rather by referencing the 
+first element's memory address: 
+```cpp
+void bubbleSort(int* arr, int length) {
+               // Because one can access an array by accessing its first element (arrays are contiguous), let the pointer refer to the memory address of element indexed 0
+               // alternatively write int[] arr
+     for (int i = 0; i < length; i++) {
+          for (int j = 0; j < length - i - 1; j++) {
+               if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j] = temp;
+               }
+          } 
+     }
+}
+```
+
 ---
 
 ### 2.4 References
@@ -306,6 +325,7 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
+
 
 
 
