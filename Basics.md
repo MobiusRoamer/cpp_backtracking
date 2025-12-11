@@ -298,7 +298,8 @@ void bubbleSort(int* arr, int length) {
 
 ### 2.5 Class
 Don'ts
-1. Use one field to initialize another field
+1. Use one field to initialize another field. C++ requires class-member initializers to be compile-time expressions. However, constructors are usually executed after compile time
+2. 
 
 
 ---
@@ -330,6 +331,7 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
+
 
 
 
