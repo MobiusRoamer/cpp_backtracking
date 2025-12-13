@@ -429,7 +429,7 @@ unordered_map<Location, T, LocationHash> map;
 ```
 In general, the template for hashMap is 
 ```cpp
-**template<
+template<
     class Key,
     class T,
     class Hash = std::hash<Key>,
@@ -448,7 +448,21 @@ Don'ts
 ---
 
 ## 3. (IMPORTANT) Machine Level Language
+### 3.1 Object Oriented
+When executing programs, memory management is peformed by four components. 
 
+Upon successful compilation, an `.exe` file is generated wich contains the executable programs. Prior to execution
+1. Code/Text:
+   
+   stores the binary code to be executed by CPU. It is generated once (to handle repeated executions of the same code), and read-only. 
+2. Global:
+
+   stores global constants. The operating system instead of the developer determines the life / death of data stored here. They are usually variables declared outside any functions, or using `static` if placed within a function. 
+
+3. Stack
+4. Heap
+   
+   
 
 ---
 ### Overloading
@@ -472,6 +486,7 @@ Day& operator++(Day& d)
    return d = (sat == d) ? sum : static_cast<Day>(d + 1); // data type cast
 }
 ```
+
 
 
 
