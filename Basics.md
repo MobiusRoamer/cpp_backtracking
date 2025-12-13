@@ -349,8 +349,31 @@ We can use the pointer to access the field values of the struct. Importantly, ac
 ```cpp
 int xLoc = p -> x;
 ```
+#### 2.4.4 Nested `struct` 
+```cpp
+struct Location { int x, y; };
+struct Machine {
+     int id;
+     struct Location location;
+     double gpu;
+     ...
+};
+```
+Now to create a `Machine`, 
+```cpp
+Machine m;
+m.id = 10;
+m.location.x = 0;
+m.location.y = 100;
+m.gpu = 205.3;
+```
 
-#### 2.4.4 Overriding Instance Equality
+#### 2.4.5 Passing `struct` by Value and Address into Functions
+Reall passing by value means we mutate formal parameters instead of value parameters. 
+Passing by address means we mutate both formal and value parameters. 
+
+
+#### 2.4.5 Overriding Instance Equality
 We usually need to override the notion of equality for generic data types when we expect to 
 perform operations with data structure `unordered_map`. This is commonly done as follows
 ```cpp
@@ -361,7 +384,7 @@ struct Location {
      }
 };
 ```
-#### 2.4.4 Hash Functions for Generic struct
+#### 2.4.6 Hash Functions for Generic struct
 For the data type to be hashable, we can define its hashcode as a separate struct
 ```cpp
 struct LocationHash {
@@ -424,6 +447,7 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
+
 
 
 
