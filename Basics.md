@@ -300,13 +300,27 @@ Suppose we define a 2D location data type
 struct Location { int x, y; };
 ```
 
-We can create a Location in three different ways
+We can create a `Location` in three different ways
+- Method 1: field value assignment
 ```cpp
 // first create an instance, then assign field values
 struct Location l1;
 l1.x = 3;
 l1.y = 3;
 ```
+- Method 2: direct creation using `{}`
+```cpp
+Location l1 = {3, 3};
+```
+- Method 3 (not recommended for most cases, but works)
+```cpp
+// initalize location named l1
+struct Location { int x, y; }l1;
+// then assign values
+s3.x = 3;
+s3.y = 3;
+```
+
 
 #### 2.4.2 
 
@@ -384,6 +398,7 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
+
 
 
 
