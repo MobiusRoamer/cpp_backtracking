@@ -1,5 +1,12 @@
 # Basics
 
+---
+**Table of Contents**
+1. Header Files
+2. Data and Operators
+3. (IMPORTANT) Machine Level Language
+
+---
 
 ## 1. Header Files (.cpp; .h)
 When we have a large amount of functions we need to organize them in a smarter way.
@@ -458,6 +465,7 @@ Day& operator++(Day& d)
    return d = (sat == d) ? sum : static_cast<Day>(d + 1); // data type cast
 }
 ```
+
 
 
 
