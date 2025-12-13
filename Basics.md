@@ -382,16 +382,23 @@ Passing by address means we mutate both formal and value parameters.
 Suppose we have a function `void func()`
 ```cpp
 // Passing by VALUE
-func(struct Location l);
+void funcVal(struct Location* location) {
+     cout << "Machine located at x=" << l.x << ", " << "y=" << l.y << endl;
+}
 
 // Passing by ADDRESS
 // we define the function as
-void func(struct Location* location) {
+void funcAdd(struct Location* location) {
      cout << "Machine located at x=" << l -> x << ", " << "y=" << l -> y << endl;
      // We need to use the arrow symbol to access field values because the function input is a pointer `*`. 
 }
+
 // Then call the function using 
-func(struct Location& l);
+int main() {
+     struct Location l = { 3, 3 };
+     funcVal(l);
+     funcAdd(&l);
+}
 ```
 
 #### 2.4.5 Overriding Instance Equality
@@ -465,6 +472,7 @@ Day& operator++(Day& d)
    return d = (sat == d) ? sum : static_cast<Day>(d + 1); // data type cast
 }
 ```
+
 
 
 
