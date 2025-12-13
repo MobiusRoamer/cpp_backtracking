@@ -196,7 +196,7 @@ Finally if we want to keep both values and referential links fixed,
 const int * const p = &a;
 ```
 
-#### 2.2.4 const Pointer with Arrays
+#### 2.2.4 Reading the First Element of Array using Pointer
 We can read the first element of an array using a pointer
 
 ```cpp
@@ -294,7 +294,7 @@ void bubbleSort(int* arr, int length) {
 
 ### 2.4 Struct
 
-#### 2.4.1 Defining a struct
+#### 2.4.1 Defining `struct`
 Suppose we define a 2D location data type
 ```cpp
 struct Location { int x, y; };
@@ -321,10 +321,36 @@ s3.x = 3;
 s3.y = 3;
 ```
 
+#### 2.4.2 Array of `struct`
+Suppose we wish to create an array of a `struct` data type
+```cpp
+struct Location locArr[2] =
+{
+     {2, 1};
+     {2, 2};
+};
+```
+and we can mutate the field value of a `struct` item in the array as follows
+```cpp
+locArr[2].y = 3;
+```
 
-#### 2.4.2 
+#### 2.4.3 Pointers to `struct`
+Suppose 
+```cpp
+struct Location l1 = {3, 3};
+```
+We can link a pointer to the struct field variable as follows 
+```cpp
+// A pointer Location* means the pointer points to a data type "Location"'s memory address
+struct Location* p = &l1;
+```
+We can use the pointer to access the field values of the struct. Importantly, accessing a field value using a pointer requires the arrow `->` 
+```cpp
+int xLoc = p -> x;
+```
 
-#### 2.4.3 Overriding Instance Equality
+#### 2.4.4 Overriding Instance Equality
 We usually need to override the notion of equality for generic data types when we expect to 
 perform operations with data structure `unordered_map`. This is commonly done as follows
 ```cpp
@@ -398,6 +424,7 @@ Concepts are defined using classes. There are concrete, abstract classes, also t
 
 A struct works the same way as a class, except for the difference that members of a class are private by 
 default and members of a structure are public by default. 
+
 
 
 
