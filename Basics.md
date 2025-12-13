@@ -369,9 +369,23 @@ m.gpu = 205.3;
 ```
 
 #### 2.4.5 Passing `struct` by Value and Address into Functions
-Reall passing by value means we mutate formal parameters instead of value parameters. 
+Recall passing by value means we mutate formal parameters instead of value parameters. 
 Passing by address means we mutate both formal and value parameters. 
 
+Suppose we have a function `void func()`
+```cpp
+// Passing by VALUE
+func(struct Location l);
+
+// Passing by ADDRESS
+// we define the function as
+void func(struct Location* location) {
+     cout << "Machine located at x=" << l -> x << ", " << "y=" << l -> y << endl;
+     // We need to use the arrow symbol to access field values because the function input is a pointer `*`. 
+}
+// Then call the function using 
+func(struct Location& l);
+```
 
 #### 2.4.5 Overriding Instance Equality
 We usually need to override the notion of equality for generic data types when we expect to 
@@ -417,6 +431,10 @@ Don'ts
 1. Use one field to initialize another field. C++ requires class-member initializers to be compile-time expressions. However, constructors are usually executed after compile time
 2. 
 
+---
+
+## 3. (IMPORTANT) Machine Level Language
+
 
 ---
 ### Overloading
@@ -440,13 +458,6 @@ Day& operator++(Day& d)
    return d = (sat == d) ? sum : static_cast<Day>(d + 1); // data type cast
 }
 ```
-
-
-### Class
-Concepts are defined using classes. There are concrete, abstract classes, also those in hierarchies. 
-
-A struct works the same way as a class, except for the difference that members of a class are private by 
-default and members of a structure are public by default. 
 
 
 
