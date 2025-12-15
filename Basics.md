@@ -11,7 +11,7 @@
 
 ---
 
-## 1. Header Files (.cpp; .h)
+## 1. Header Files
 When we have a large amount of functions we need to organize them in a smarter way.
 We create a separate source `.cpp` file with functionalities and a header file that enables us to include the source file.
 
@@ -513,6 +513,7 @@ Day& operator++(Day& d)
    return d = (sat == d) ? sum : static_cast<Day>(d + 1); // data type cast
 }
 ```
+
 
 
 
