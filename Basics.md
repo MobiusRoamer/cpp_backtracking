@@ -2,9 +2,9 @@
 
 ---
 **Table of Contents**
-1. Header Files
-2. Data and Operators
-3. (IMPORTANT) Machine Level Language
+**1 Header Files**
+**2 Data and Operators**
+**3 (IMPORTANT) Machine Level Language**
 
 ---
 
@@ -215,6 +215,30 @@ int main() {
      p++; // increment the memory address by 4 bits (because each int type consumes 4 bit memory space)
      cout << *p << endl; // reads the second element arr[1]
      ...
+}
+```
+
+---
+### 2.3 Reference
+A reference variable declared using a `&` in front is commonly used for giving variables an alias. 
+
+For example
+```cpp
+int main() {
+     int a = 10;
+     // Let b be an alias of a, so both a and b are variable names pointing to the same memory address
+     &b = a;
+
+     cout << a << endl;
+     cout << b << endl;
+     // Expect: 10, 10
+
+     // When mutating the reference b, we expect a to change synchronously
+     b = 100;
+
+     cout << a << endl;
+     cout << b << endl;
+     // Expect: 100, 100
 }
 ```
 
@@ -486,6 +510,7 @@ Day& operator++(Day& d)
    return d = (sat == d) ? sum : static_cast<Day>(d + 1); // data type cast
 }
 ```
+
 
 
 
