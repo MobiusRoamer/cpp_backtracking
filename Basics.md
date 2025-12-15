@@ -2,8 +2,11 @@
 
 ---
 **Table of Contents**
+
 **1 Header Files**
+
 **2 Data and Operators**
+
 **3 (IMPORTANT) Machine Level Language**
 
 ---
@@ -510,6 +513,7 @@ Day& operator++(Day& d)
    return d = (sat == d) ? sum : static_cast<Day>(d + 1); // data type cast
 }
 ```
+
 
 
 
