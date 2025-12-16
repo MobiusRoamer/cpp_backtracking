@@ -433,14 +433,94 @@ int main() {
      int &ref = func();
      cout << ref << endl; // works fine, prints 10 
      cout << ref << endl; // doesn't work anymore, local variables are released upon termination of the function
+     // This means the reference is pointing to void at this point
 }
 ```
+
+Functional calls when returning references can be used as left values.
+```cpp
+int& func01() {
+     static int a = 10; // the constant is now placed in the global region of memory management (see section 6)
+          // it will be deleted by the system as part of its memory management protocol after the termination
+          // of the whole program (not just this function)
+     return a;
+]
+
+int main() {
+     int &ref01 = func01();
+     cout << ref01 << endl;
+     cout << ref01 << endl; // prints 10 for both commands, because data is stored in global
+
+     func01() = 1000; // the functional call is used as lvalue, and mutates the original value
+     cout << ref01 << endl; // we are visiting the mutated value using alias, prints 1000 now
+}
+```
+
+### 5.5 Default Values 
+We can set default argument values, so the function takes the default even when not given all required inputs.
+```cpp
+int add(int a, int b = 10, int c = 20) {
+     return a + b + c;
+}
+
+int main() {
+     cout << add(10, 30) << endl; // use default value for c, but provides explicit value for a and b 
+}
+```
+Note, however, if an argument that is not the last argument to the function has a default value, all arguments ordered after this one must also have a default value. 
+
+### 5.6 Overloading
+Overloading requires variation in inputs, keeping the same function name.
+
+#### 5.6.1 Overloading with Reference&
+
+```cpp
+void fun(int &a) {
+     ...
+}
+
+void fun(const int &a) {
+     ...
+}
+
+int main() {
+     int a = 10; // a variable is by default both read and write
+     fun(a); // Which function will the compiler call?
+     // The first one. `const` in the second function restricts to read only
+
+     fun(10); // Which function will the compiler call?
+     // The second one.
+     // This means we pass const int &a = 10 into the second function
+     // The literal 10 does not have a permanent memory location and cannot be modified (it's an expression that results in a temporary value).
+     //     It is an rvalue. (rvalues typicallu stored on stack)
+     // The C++ standard prevents a non-const reference from binding to a temporary (rvalue) because any modifications made through the reference would be lost immediately after the       //     function call, leading to potential undefined behavior .
+}
+```
+
+
+### 5.7 Overriding
+There are common overloads when defining generic data types (`struct`). 
+
+#### 5.7.1 Override Instance Equality
+When declaring a new `struct`, a common operator that will be called on the data type is instance equality. 
+Override the equality of two `struct` data types within the same `struct`. 
+```cpp
+struct Location {
+     int x, y;
+     bool operator==(Location& l) {
+          return l.x == x && l.y == y;
+     }
+}
+```
+
+#### 5.7.2 Override Hash Code
+When using the 
 
 ---
 
 
-## 3. (IMPORTANT) Machine Level Language
-### 3.1 Object Oriented
+## 6. (IMPORTANT) Machine Level Language
+### 6.1 Object-Oriented
 When executing programs, memory management is peformed by four components. 
 
 Upon successful compilation, an `.exe` file is generated wich contains the executable programs. Prior to execution
@@ -457,29 +537,6 @@ Upon successful compilation, an `.exe` file is generated wich contains the execu
    
 
 ---
-### Overloading
-A compile time polymorphism in where the compiler infers which of the functions sharing the same name to call depending on input arguments. 
-
-Overloading is usually applied to operators. An operator function must either be a member r take at least one argument of a user-defined type.
-
-In particular, it is impossible to define an operator function that operates exclusively on pointers. 
-The template of overloading, for example, the addition operator `+=`, with generic class, is 
-```cpp
-MyClass& operator += (const MyClass& other) {
-   // Implementation to add 'other' to 'this' object
-   //...
-   // return *this;
-}
-
-// for example
-enum Day { sun, mon, tue, wed, thu, fri, sat }
-Day& operator++(Day& d)
-{
-   return d = (sat == d) ? sum : static_cast<Day>(d + 1); // data type cast
-}
-```
-
-
 
 
 
