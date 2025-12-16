@@ -192,14 +192,12 @@ struct Machine {
      ...
 };
 ```
-Now to create a `Machine`, 
-```cpp
-
 ---
+
 
 ## 4. Pointers and References
 
-4.1 Pointers
+### 4.1 Pointers
 Pointers are abstraction that aim to help programmers avoid addressing errors. A pointer has two aspects, value and type. 
 Value indicates the location of some object and the type indicates what kind of object is stored at that location. 
 
@@ -217,14 +215,13 @@ We can assign variables using pointers,
 char c = 'a';
 char* p = &c; // p holds the address of c; & is the "address-of" operator
 ```
-
 Before considering what pointers can do, it is useful to understand why we need pointers in C++.
 C++ also C closest to machine-level thinking stores memory in a contiguous array. A pointer tells the machine
-to look at a specific memory address to instruct it where the data lives. The concept is native to the hardware memory management. 
-#### 2.2.1 Creating a Pointer
+to look at a specific memory address to instruct it where the data lives. 
+#### 4.1.1 Creating a Pointer
 Pointers are created using the `&` operator. This operator can be applied to any C++ expression that is categorized as 
 `lvalue`, an expression that can appear on teh left side of an assignment.
-#### 2.2.2 Dereferencing 
+#### 4.1.2 Dereferencing 
 Pointers are dereferenced using the `*` operator. This gives back a value having the type associated with the pointer. 
 Note we can dereference as follows
 ```cpp
@@ -250,7 +247,7 @@ int myVariable = 10;
 int* myPointer = &myVariable; // myPointer holds the memory address of myVariable
 *myPointer = 20; // changes the value of myVariable to 20
 ```
-#### 2.2.3 const Pointer
+#### 4.1.3 const Pointer
 
 Using a `const` in front of a pointer means we can only read but not mutate the pointed data. However, we can change the referential link: the pointer can point
 to something else. 
@@ -286,7 +283,7 @@ Finally if we want to keep both values and referential links fixed,
 const int * const p = &a;
 ```
 
-#### 2.2.4 Reading the First Element of Array using Pointer
+#### 4.1.4 Reading the First Element of Array using Pointer
 We can read the first element of an array using a pointer
 
 ```cpp
@@ -301,8 +298,7 @@ int main() {
 }
 ```
 
----
-### 2.3 Reference
+### 4.2 Reference
 A reference variable declared using a `&` in front is commonly used for giving variables an alias. It creates a referential link between two variables. 
 
 For example
@@ -345,14 +341,14 @@ b = c; // means we mutate the value that b points to. Since a and b point to the
 
 ---
 
-## 2.4 Functions
+## 5. Functions
 
-#### 2.4.1 Formal and Value parameters
+### 5.1 Formal and Value parameters
 Formal parameters are variables declared in the function's definition or signature.
 
 Value parameters are a special case where a copy of the actual argument's value is passed to the function.
 
-#### 2.4.2 Passing by Value
+### 5.2 Passing by Value
 ```cpp
 // In the following function, num1 and num2 are formal parameters
 void swap(int num1, int num2) {
@@ -377,7 +373,7 @@ int main() {
 ```
 Observe: formal parameters are swapped (num1, num2 change their referential links to 10, 20), but value parameters (a, b) remain the same (referential link to 10, 20 remian unchanged)
 
-#### 2.4.3 Passing by Address
+### 5.3 Passing by Address
 Still consider the swap function defined as before, now
 ```cpp
 // Note in the following function we are passing the memory addresses of num1 and num2 into the function 
@@ -422,16 +418,26 @@ void bubbleSort(int* arr, int length) {
 }
 ```
 
-#### 2.4.4 Passing by Reference
+### 5.4 Passing by Reference
+Passing by reference means we pass an alias pointing to a variable. When fed into functions as argument, the function can mutate the referenced variable on th eobject level. 
+
+Do not return references to local constants. 
+For example, 
+```cpp
+int& func() {
+     int a = 10; // a local constant
+     return a;
+}
+
+int main() {
+     int &ref = func();
+     cout << ref << endl; // works fine, prints 10 
+     cout << ref << endl; // doesn't work anymore, local variables are released upon termination of the function
+}
+```
 
 ---
 
-### 2.5 Class
-Don'ts
-1. Use one field to initialize another field. C++ requires class-member initializers to be compile-time expressions. However, constructors are usually executed after compile time
-2. 
-
----
 
 ## 3. (IMPORTANT) Machine Level Language
 ### 3.1 Object Oriented
@@ -472,6 +478,7 @@ Day& operator++(Day& d)
    return d = (sat == d) ? sum : static_cast<Day>(d + 1); // data type cast
 }
 ```
+
 
 
 
