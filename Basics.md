@@ -5,9 +5,15 @@
 
 **1 Header Files**
 
-**2 Data and Operators**
+**2 Primitive Data Types**
 
-**3 (IMPORTANT) Machine Level Language**
+**3 Generic Data Type**
+
+**4 Pointers and References**
+
+**5 Functions**
+
+**6 (IMPORTANT) Memory Management**
 
 ---
 
@@ -44,25 +50,24 @@ But don't compile directly, we are not accessing any functionalities yet. We nee
 
 ---
 
-## 2. Data and Operators
+## 2. Primitive Data Types
 
-### 2.1 Types
 The purpose of types is to make memory storage more efficient. The machine will allocate different storage size 
 depending on types hence saving on memory space depending on the variables.
 
-#### 2.1.1 Integer 
+#### 2.1 Integer 
 `short` (2 bytes), `int` (4 bytes), `long` (4 bytes under 32-bit OS and 8 under 64-bit OS) and `long long` (8 bytes) can all be used to store integers
 
 To read the memory consumed by a variable or a type, use `sizeof()`.
 
-#### 2.1.2 Float 
+#### 2.2 Float 
 Mainly for the representation of decimals: `float` (4 bytes), `short` (8 bytes).
 
 When declaring float type, write `f = 3.14f;`.
 
 Scientific notations can be written as `flaot f = 3e-2;`
 
-#### 2.1.3 Character 
+#### 2.3 Character 
 A char type only takes one byte. It is not stored as the exact character but rather in the ASCII form. We can directly declare a
 char type using its ASCII code, for example
 ```cpp
@@ -70,14 +75,14 @@ char ch = 'a';
 ch = 97;
 ```
 
-#### 2.1.4 String
+#### 2.4 String
 String is an array of char (in C style)
 ```c
 char str1[] = "hello world"; 
 ```
 and in C++ we declare using the `string` keyword explicitly instead of `char`.
 
-#### 2.1.5 Boolean
+#### 2.5 Boolean
 Takes only one byte: `0` represents false and `1` represents true. 
 
 `~`: NEGATION
@@ -118,8 +123,83 @@ Takes only one byte: `0` represents false and `1` represents true.
    ```
    
 ---
+## 3. Generic Data Types
 
-### 2.2 Pointers
+### 3.1 Struct
+
+#### 3.1.1 Defining `struct`
+Suppose we define a 2D location data type
+```cpp
+struct Location { int x, y; };
+```
+
+We can create a `Location` in three different ways
+- Method 1: field value assignment
+```cpp
+// first create an instance, then assign field values
+struct Location l1;
+l1.x = 3;
+l1.y = 3;
+```
+- Method 2: direct creation using `{}`
+```cpp
+Location l1 = {3, 3};
+```
+- Method 3 (not recommended for most cases, but works)
+```cpp
+// initalize location named l1
+struct Location { int x, y; }l1;
+// then assign values
+s3.x = 3;
+s3.y = 3;
+```
+
+#### 3.1.2 Array of `struct`
+Suppose we wish to create an array of a `struct` data type
+```cpp
+struct Location locArr[2] =
+{
+     {2, 1};
+     {2, 2};
+};
+```
+and we can mutate the field value of a `struct` item in the array as follows
+```cpp
+locArr[2].y = 3;
+```
+
+#### 3.1.3 Pointers to `struct`
+Suppose 
+```cpp
+struct Location l1 = {3, 3};
+```
+We can link a pointer to the struct field variable as follows 
+```cpp
+// A pointer Location* means the pointer points to a data type "Location"'s memory address
+struct Location* p = &l1;
+```
+We can use the pointer to access the field values of the struct. Importantly, accessing a field value using a pointer requires the arrow `->` 
+```cpp
+int xLoc = p -> x;
+```
+#### 3.1.4 Nested `struct` 
+```cpp
+struct Location { int x, y; };
+struct Machine {
+     int id;
+     struct Location location;
+     double gpu;
+     ...
+};
+```
+Now to create a `Machine`, 
+```cpp
+
+---
+
+## 4. Pointers and References
+
+4.1 Pointers
 Pointers are abstraction that aim to help programmers avoid addressing errors. A pointer has two aspects, value and type. 
 Value indicates the location of some object and the type indicates what kind of object is stored at that location. 
 
@@ -223,7 +303,7 @@ int main() {
 
 ---
 ### 2.3 Reference
-A reference variable declared using a `&` in front is commonly used for giving variables an alias. 
+A reference variable declared using a `&` in front is commonly used for giving variables an alias. It creates a referential link between two variables. 
 
 For example
 ```cpp
@@ -245,16 +325,34 @@ int main() {
 }
 ```
 
+References must be initialized. For example
+```cpp
+int a = 10;
+&b = a;
+// CORRECT
+
+// however,
+int &b; // The line by itself is incorrect
+```
+
+Once initialized, the referential link cannot be mutated. For example
+```cpp
+int a = 10;
+int &b = a;
+int c = 20;
+b = c; // means we mutate the value that b points to. Since a and b point to the same memory address, a will be mutated to 20 as well.
+```
+
 ---
 
-### 2.3 Functions
+## 2.4 Functions
 
-#### 2.3.1 Formal and Value parameters
+#### 2.4.1 Formal and Value parameters
 Formal parameters are variables declared in the function's definition or signature.
 
 Value parameters are a special case where a copy of the actual argument's value is passed to the function.
 
-#### 2.3.2 Passing by Value
+#### 2.4.2 Passing by Value
 ```cpp
 // In the following function, num1 and num2 are formal parameters
 void swap(int num1, int num2) {
@@ -279,7 +377,7 @@ int main() {
 ```
 Observe: formal parameters are swapped (num1, num2 change their referential links to 10, 20), but value parameters (a, b) remain the same (referential link to 10, 20 remian unchanged)
 
-#### 2.3.3 Passing by Address
+#### 2.4.3 Passing by Address
 Still consider the swap function defined as before, now
 ```cpp
 // Note in the following function we are passing the memory addresses of num1 and num2 into the function 
@@ -324,146 +422,7 @@ void bubbleSort(int* arr, int length) {
 }
 ```
 
----
-
-### 2.4 Struct
-
-#### 2.4.1 Defining `struct`
-Suppose we define a 2D location data type
-```cpp
-struct Location { int x, y; };
-```
-
-We can create a `Location` in three different ways
-- Method 1: field value assignment
-```cpp
-// first create an instance, then assign field values
-struct Location l1;
-l1.x = 3;
-l1.y = 3;
-```
-- Method 2: direct creation using `{}`
-```cpp
-Location l1 = {3, 3};
-```
-- Method 3 (not recommended for most cases, but works)
-```cpp
-// initalize location named l1
-struct Location { int x, y; }l1;
-// then assign values
-s3.x = 3;
-s3.y = 3;
-```
-
-#### 2.4.2 Array of `struct`
-Suppose we wish to create an array of a `struct` data type
-```cpp
-struct Location locArr[2] =
-{
-     {2, 1};
-     {2, 2};
-};
-```
-and we can mutate the field value of a `struct` item in the array as follows
-```cpp
-locArr[2].y = 3;
-```
-
-#### 2.4.3 Pointers to `struct`
-Suppose 
-```cpp
-struct Location l1 = {3, 3};
-```
-We can link a pointer to the struct field variable as follows 
-```cpp
-// A pointer Location* means the pointer points to a data type "Location"'s memory address
-struct Location* p = &l1;
-```
-We can use the pointer to access the field values of the struct. Importantly, accessing a field value using a pointer requires the arrow `->` 
-```cpp
-int xLoc = p -> x;
-```
-#### 2.4.4 Nested `struct` 
-```cpp
-struct Location { int x, y; };
-struct Machine {
-     int id;
-     struct Location location;
-     double gpu;
-     ...
-};
-```
-Now to create a `Machine`, 
-```cpp
-Machine m;
-m.id = 10;
-m.location.x = 0;
-m.location.y = 100;
-m.gpu = 205.3;
-```
-
-#### 2.4.5 Passing `struct` by Value and Address into Functions
-Recall passing by value means we mutate formal parameters instead of value parameters. 
-Passing by address means we mutate both formal and value parameters. 
-
-Suppose we have a function `void func()`
-```cpp
-// Passing by VALUE
-void funcVal(struct Location* location) {
-     cout << "Machine located at x=" << l.x << ", " << "y=" << l.y << endl;
-}
-
-// Passing by ADDRESS
-// we define the function as
-void funcAdd(struct Location* location) {
-     cout << "Machine located at x=" << l -> x << ", " << "y=" << l -> y << endl;
-     // We need to use the arrow symbol to access field values because the function input is a pointer `*`. 
-}
-
-// Then call the function using 
-int main() {
-     struct Location l = { 3, 3 };
-     funcVal(l);
-     funcAdd(&l);
-}
-```
-
-#### 2.4.5 Overriding Instance Equality
-We usually need to override the notion of equality for generic data types when we expect to 
-perform operations with data structure `unordered_map`. This is commonly done as follows
-```cpp
-struct Location {
-     int x, y;
-     bool operator==(const Location& l) {
-          return l.x == x && l.y == y;
-     }
-};
-```
-#### 2.4.6 Hash Functions for Generic struct
-For the data type to be hashable, we can define its hashcode as a separate struct
-```cpp
-struct LocationHash {
-     size_t operator()(const Location& l) const noexcept{
-          size_t h1 = hash<int>()(l.x);
-          size_t h2 = hash<int>()(l.y);
-          return h1^(h2 << 1);
-     }
-};
-```
-Now to use the struct in an unordered_map, declare a third argument
-```cpp
-unordered_map<Location, T, LocationHash> map;
-```
-In general, the template for hashMap is 
-```cpp
-template<
-    class Key,
-    class T,
-    class Hash = std::hash<Key>,
-    class KeyEqual = std::equal_to<Key>,
-    class Allocator = std::allocator< std::pair<const Key, T> >
-> class unordered_map;**
-```
+#### 2.4.4 Passing by Reference
 
 ---
 
@@ -513,6 +472,7 @@ Day& operator++(Day& d)
    return d = (sat == d) ? sum : static_cast<Day>(d + 1); // data type cast
 }
 ```
+
 
 
 
