@@ -143,16 +143,3 @@ private:
 //     }
 
 };
-//
-// int main() {
-//     PalindromePartition test;
-//     vector<vector<string>> res = test.partition("aab");
-//     for (vector<string> s : res) {
-//         for (int i = 0; i < s.size(); i++) {
-//             cout << s[i];
-//             if (i < s.size() - 1) { cout << ", "; }
-//         }
-//         cout << "; ";
-//     }
-//     cout << endl;
-// }
