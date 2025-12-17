@@ -1,7 +1,3 @@
-//
-// Created by alyss on 1/12/2025.
-//
-
 #include "Combinations.h"
 #include "Permutations.h"
 #include "Subset.h"
