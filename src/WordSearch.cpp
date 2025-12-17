@@ -1,7 +1,3 @@
-//
-// Created by alyss on 8/12/2025.
-//
-
 #include <vector>
 #include <string>
 #include <stack>
@@ -88,4 +84,5 @@ int main() {
     board.push_back({'S','F','C','S'});
     board.push_back({'A','D','E','E'});
     cout << test.wordSearch(board, "ABCCED") << endl;
+
 }
