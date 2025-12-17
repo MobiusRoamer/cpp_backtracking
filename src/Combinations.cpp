@@ -1,5 +1,3 @@
-
-
 // Version 29/11/2025 (Correct: compared to the previous incorrect version, the key is to only use one functional call dfs
 // in the parent call combine() (line 22)
 #include <vector>
