@@ -1,7 +1,4 @@
-//
-// Created by alyss on 27/11/2025.
-//
-
+// 27/11/2025.
 #include <vector>
 #include <iostream>
 using namespace std;
