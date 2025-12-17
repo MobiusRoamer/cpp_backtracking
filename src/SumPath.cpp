@@ -1,8 +1,3 @@
-//
-// Created by alyss on 2/12/2025.
-//
-
-
 #include <vector>
 using namespace std;
 
