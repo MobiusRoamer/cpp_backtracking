@@ -517,7 +517,8 @@ NOTE: the override as given above is not usually efficient. Consider
 ```cpp
 struct Location {
      int x, y;
-     bool operator==(const Location& l) { // add const and reference &
+     bool operator==(const Location& l) const { // add const and reference &
+     // The two "const"s ensure we will not mutate the passed Location argument, nor "this" element
           return l.x == x && l.y == y;
      }
 }
@@ -526,6 +527,13 @@ A `const T&` parameter can accept both modifiable (lvalues) and temporary (rvalu
 
 For a generic class `T`, if we omit const (using T&), the operator could not be used to compare a constant object or a temporary object (e.g., the result of an arithmetic operation like `(a + b) == c`), leading to compilation errors.
 
+
+Furthermore, we need to also explicitly declare what inequality means if ever using `!=`. This is usually defined in terms of the equality operator
+```cpp
+bool operator!=(const Location& l) const {
+     return !(*this == l); // The dereferencing * means we get the actual object stored under the referenced memory address
+}
+```
 #### 5.7.2 Override Binary Operators
 The template for global function override is
 ```cpp
@@ -626,6 +634,7 @@ Upon successful compilation, an `.exe` file is generated wich contains the execu
    
 
 ---
+
 
 
 
