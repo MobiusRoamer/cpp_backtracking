@@ -513,8 +513,40 @@ struct Location {
 }
 ```
 
-#### 5.7.2 Override Hash Code
-When using the 
+#### 5.7.2 Override Arithmetic Operators
+When defining generic classes, the compiler needs to be instructed explicitly on the meaning of basic arithmetic with these class objects. We can do so in two ways (a) declare a 
+class member overriding function or (b) declare a global function
+```cpp
+class Person {
+     int m_A;
+     int m_B;
+
+     // Method 1:
+     Person operator+ (Person& p) {
+          Person temp;
+          temp.m_A = this -> m_A + p.m_A;
+          temp.m_B = this -> m_B + p.m_B;
+          return temp;
+     }
+}
+
+// Method 2:
+Person operator +(Person& p1, Person& p2) {
+     Person temp;
+     temp.m_A = p1.m_A + p2.m_A;
+     temp.m_B = p1.m_B + p2.m_B;
+     return temp;
+}
+
+// Now Add Two Persons together
+Person p1, p2;
+p1.m_A = 10;
+p1.m_B = 10;
+p2.m_B = 20;
+p2.m_B = 20;
+
+Person p3 = p1 + p2;
+```
 
 ---
 
@@ -537,6 +569,7 @@ Upon successful compilation, an `.exe` file is generated wich contains the execu
    
 
 ---
+
 
 
 
