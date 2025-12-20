@@ -526,7 +526,15 @@ A `const T&` parameter can accept both modifiable (lvalues) and temporary (rvalu
 
 For a generic class `T`, if we omit const (using T&), the operator could not be used to compare a constant object or a temporary object (e.g., the result of an arithmetic operation like `(a + b) == c`), leading to compilation errors.
 
-#### 5.7.2 Override Arithmetic Operators
+#### 5.7.2 Override Binary Operators
+The template for global function override is
+```cpp
+T operator op (T& a, T& b);
+// means they are called as
+a op b
+// where op is an arbitrary operator (+, -, *, /, <<...)
+```
+##### 5.7.2.1 Arithmetic Operators
 When defining generic classes, the compiler needs to be instructed explicitly on the meaning of basic arithmetic with these class objects. We can do so in two ways (a) declare a 
 class member overriding function or (b) declare a global function
 ```cpp
@@ -568,16 +576,35 @@ Person p3 = operator+(p1, p2);
 Person p3 = p1 + p2;
 ```
 
-#### 5.7.3 Override Shift Operators
-Notice the original `<<` operator is inherently overloaded: it can both mean shifting in digits and printing an output depending on the given arguments (prints when given `cin` and `cout`).
+##### 5.7.2.2 Override Shift Operators
+Notice the original `<<` operator is inherently overloaded: it can both mean shifting in digits and printing an output depending on the given arguments (prints when given `cin` and `cout`, which is an `ostream` data type).
 
-This is a special case where only Global Function Override works. To see that class member function override fails, consider 
+This is a special case where only Global Function Override works. To see that class member function override fails, consider overriding the function as a class member 
 ```cpp
+class Person {
+     Person operator<<(cout);
+}
+```
+But this means when calling the operator, we cannot put `cout` on the left hand side of `<<`, and in fact we would obtain 
+```cpp
+Person p;
+p << cout;
+```
+But the compiler only recognises a print command with `cout` when it is placed on the left hand side of `<<`. 
 
+So we can only override in the global environment
+```cpp
+ostream& operator<<(ostream& cout, Person& p1) {
+// (1) need to return an ostream, otherwise <<endl will not compile
+// (2) need to pass cout as a reference because this override function does not own cout
+//     because only one cout exists in the entire program and outside this function
+
+     cout << "m_A=" << p.m_A << "m_B=“ << p.m_B;
+     return cout; // cout can be renamed to any other alias as long as consistent throughout this override
+}
 ```
 
-
-#### 5.7.4 Override Iterators
+#### 5.7.2.2 Override Iterators
 ---
 
 
@@ -599,6 +626,7 @@ Upon successful compilation, an `.exe` file is generated wich contains the execu
    
 
 ---
+
 
 
 
