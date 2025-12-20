@@ -507,11 +507,24 @@ Override the equality of two `struct` data types within the same `struct`.
 ```cpp
 struct Location {
      int x, y;
-     bool operator==(Location& l) {
+     bool operator==(Location l) {
           return l.x == x && l.y == y;
      }
 }
 ```
+
+NOTE: the override as given above is not usually efficient. Consider
+```cpp
+struct Location {
+     int x, y;
+     bool operator==(const Location& l) { // add const and reference &
+          return l.x == x && l.y == y;
+     }
+}
+```
+A `const T&` parameter can accept both modifiable (lvalues) and temporary (rvalues) objects.
+
+For a generic class `T`, if we omit const (using T&), the operator could not be used to compare a constant object or a temporary object (e.g., the result of an arithmetic operation like `(a + b) == c`), leading to compilation errors.
 
 #### 5.7.2 Override Arithmetic Operators
 When defining generic classes, the compiler needs to be instructed explicitly on the meaning of basic arithmetic with these class objects. We can do so in two ways (a) declare a 
@@ -545,9 +558,26 @@ p1.m_B = 10;
 p2.m_B = 20;
 p2.m_B = 20;
 
+// Under Method 1, we call
+Person p3 = p1.operator+(p2);;
+
+// Under Method 2, we call
+Person p3 = operator+(p1, p2);
+
+// In fact no matter using Method 1 or 2 we can always call
 Person p3 = p1 + p2;
 ```
 
+#### 5.7.3 Override Shift Operators
+Notice the original `<<` operator is inherently overloaded: it can both mean shifting in digits and printing an output depending on the given arguments (prints when given `cin` and `cout`).
+
+This is a special case where only Global Function Override works. To see that class member function override fails, consider 
+```cpp
+
+```
+
+
+#### 5.7.4 Override Iterators
 ---
 
 
@@ -569,6 +599,7 @@ Upon successful compilation, an `.exe` file is generated wich contains the execu
    
 
 ---
+
 
 
 
