@@ -92,35 +92,6 @@ Takes only one byte: `0` represents false and `1` represents true.
 `|`: OR returns the same element when two elements are the same, returns `1` when different
 
 `^`: EXCLUSIVE-OR 
-
-#### 2.1.2 Concrete Types 
-   Can be instantiated using the `new` operator.
-   The compiler knows the exact memory layout and size of objects at compile time, hence concrete types can be allocated on stack. 
-#### 2.1.3 Arithmetic type
-   ```cpp
-   class complex {
-        double re, im;
-
-   // Constructors
-   public:
-        complex(double r, rouble i) :re{r}, im{i} {}
-        complex(double r) :re{r}, im{0} {}
-        complex(double i) :re{0}, im{i} {}
-        complex() :re{0}, im(0) {}
-
-   // getters
-        double real() const { return re; } // const signifies that this member function will not modify any of the object's member variables
-        double imag() const  {return im; } // const is for safety!
-   // assignment
-        void real(double d) { re = d; }
-        void imag(double d) { im = d; }
-
-   // operations
-        complex& operator += (complex z) { re += z.re, im += z.im; return *this; }
-        complex& operator -= (complex z) { re -= z.re, im -= z.im; return *this; }
-        complex& operator *= (complex z);
-        complex& operator /= (complex z);
-   ```
    
 ---
 ## 3. Generic Data Types
@@ -613,6 +584,41 @@ ostream& operator<<(ostream& cout, Person& p1) {
 ```
 
 #### 5.7.2.2 Override Iterators
+
+
+
+### 5.8 Friend 
+
+#### 5.8.1 Global Functions as Friend
+
+A friend class can be granted access to private fields of a class. 
+```cpp
+class Building {
+     ****
+     //BestFriend as a global function is a friend class of Building and can access all fields of Building
+     friend void bestFriend(Building& building);
+     ****
+public:
+     string m_SittingRoom;
+     Building() {
+          m_SittingRoom = "Sitting Room";
+          m_BedRoom = "BedRoom";
+     }
+private:
+     string m_BedRoom
+};
+
+void bestFriend(Building& building) {
+     cout << "Best friend is visiting " << building->m_SittingRoom << endl; //Works fine, because sittingRoom is public field
+     cout << "Best friend is visiting " << building->m_BedRoom << endl; //Fails without the line `****` because bedRoom is private field
+}
+
+int main() {
+     Building building;
+     bestFriend(&building);
+}
+```
+
 ---
 
 
@@ -634,6 +640,7 @@ Upon successful compilation, an `.exe` file is generated wich contains the execu
    
 
 ---
+
 
 
 
