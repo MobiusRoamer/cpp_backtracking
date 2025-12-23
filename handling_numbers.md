@@ -28,6 +28,9 @@ private:
     }
 };
 ```
+
+For example, if the base is `x = 1.0` but `n = 100000000`, the stack explodes. 
+
 Steps: 
 - Convert exponent n to binary
 - Initialize result - 1, base = a
