@@ -618,6 +618,92 @@ int main() {
      bestFriend(&building);
 }
 ```
+#### 5.8.2 Class as Friend
+Classes can also be friends of another class. Consider the same example of `Building` but now with `bestFriend` as a friend class. 
+```cpp
+class Building; // reserve the class for now, so the compiler knows Building will be defined later
+class BestFriend {
+public:
+     BestFriend();
+     void visit();
+     Building* building; 
+};
+
+class Building {
+     ****
+     // Class BestFriend can access all (incl. private) fields of Building
+     friend class BestFriend;
+     ****
+public:
+     string m_SittingRoom;
+private:
+     string m_BedRoom
+};
+
+// Defining constructors and functions outside the class
+Building::Building() {
+     m_SittingRoom = "Sitting Room";
+     m_BedRoom = "BedRoom";
+}
+BestFriend::BestFriend() {
+     building = new Building; // a pointer to Building stored on stack
+     
+}
+void BestFriend::visit() {
+     cout << "Best friend is visiting " << building->m_SittingRoom << endl;
+     cout << "Best friend is visiting " << building->m_BedRoom << endl; // Works only when line **** declares BestFriend as friend class
+}
+
+int main() {
+     BestFriend bf;
+     bf visit();
+}
+```
+#### 5.8.3 Member Function as Friend
+```cpp
+class Building; // reserve the class for now, so the compiler knows Building will be defined later
+class BestFriend {
+public:
+     BestFriend();
+     void visit();
+     Building* building; 
+};
+
+class Building {
+     ****
+     // Function visit1() from BestFriend can visit all (incl. private) fields of Building
+     friend void BestFriend::visit1();
+     ****
+public:
+     string m_SittingRoom;
+private:
+     string m_BedRoom
+};
+
+// Defining constructors and functions outside the class
+Building::Building() {
+     m_SittingRoom = "Sitting Room";
+     m_BedRoom = "BedRoom";
+}
+BestFriend::BestFriend() {
+     building = new Building; // a pointer to Building stored on stack
+     
+}
+void BestFriend::visit() {
+     cout << "Best friend is visiting " << building->m_SittingRoom << endl;
+     cout << "Best friend is visiting " << building->m_BedRoom << endl; // Fails
+}
+
+void BestFriend::visit1() {
+     cout << "Best friend is visiting " << building->m_BedRoom << endl; // Works only when line **** declares BestFriend as friend function
+}
+
+int main() {
+     BestFriend bf;
+     bf.visit();
+     bf.visit1();
+}
+```
 
 ---
 
@@ -640,6 +726,7 @@ Upon successful compilation, an `.exe` file is generated wich contains the execu
    
 
 ---
+
 
 
 
