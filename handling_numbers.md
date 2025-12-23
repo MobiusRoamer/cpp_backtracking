@@ -12,11 +12,12 @@ class Solution {
 public:
     double myPow(double x, int n) {
         if (n == 0) { return 1; }
+        double res;
         if (n < 0) { 
-            double denom = recurse(x, x, abs(n + 1));
-            return 1 / denom; 
+            res = 1 / recurse(x, x, abs(n + 1));
         }
-        return recurse(x, x, n - 1); 
+        res = recurse(x, x, n - 1);
+        return res;
     }
 
 private: 
