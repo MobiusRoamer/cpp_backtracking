@@ -705,6 +705,25 @@ int main() {
 }
 ```
 
+
+### 5.9 Inheritance & Polymorphism
+#### 5.9.1 Inheritance
+#### 5.9.2 Polymorphism
+The grammar of class inheritance is shown in the following example
+```cpp
+class Animal {
+     ...
+};
+
+// Must declare the parent class as public:
+// This enables public and protected members of the parent class to retain their original
+// access levels within the derived class
+class Cat :public Animal {
+     ...
+};
+```
+
+
 ---
 
 
@@ -726,6 +745,7 @@ Upon successful compilation, an `.exe` file is generated wich contains the execu
    
 
 ---
+
 
 
 
